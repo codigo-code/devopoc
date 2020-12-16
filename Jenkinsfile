@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('install') {
       steps {
-        sh 'sudo npm install'
+        sh 'node -version'
       }
     }
 
