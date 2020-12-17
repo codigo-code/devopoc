@@ -3,7 +3,8 @@ pipeline {
   stages {
     stage('install') {
       steps {
-        sh 'sh \'node -version\''
+        sh '''cd  devopoc
+ls '''
       }
     }
 
