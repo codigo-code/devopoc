@@ -3,8 +3,7 @@ pipeline {
   stages {
     stage('install') {
       steps {
-        sh '''cd  devopoc
-ls '''
+        sh 'npm install'
       }
     }
 
