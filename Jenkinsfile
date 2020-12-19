@@ -39,7 +39,6 @@ pipeline {
       stage('Deploy Image') {
       steps {
         script {
-          /* groovylint-disable-next-line NestedBlockDepth */
           docker.withRegistry( '', registryCredential ) {
             dockerImage.push("$BUILD_NUMBER")
             dockerImage.push('latest')
