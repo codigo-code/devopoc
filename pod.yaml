@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: neo-node-express-pod
+  labels:
+    name: neo-node
+spec:
+  containers:
+  - name: neo-node
+    image: solwin/neo-node
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "100m"
+    ports:
+      - containerPort: 3000
