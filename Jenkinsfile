@@ -4,9 +4,7 @@ pipeline {
     registryCredential = 'dockerhub'
     dockerImage = ''
   }
-  agent {
-    label 'docker'
-  }
+  agent any
   tools { nodejs 'node' }
     stages {
       stage('Cloning Git') {
@@ -29,16 +27,19 @@ pipeline {
           sh 'npm test'
         }
       }
-
       stage('Building image') {
         steps {
-          sh 'docker build -t test .'
+          script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+          
+          }
         }
       }
 
       stage('Deploy Image') {
       steps {
         script {
+          /* groovylint-disable-next-line NestedBlockDepth */
           docker.withRegistry( '', registryCredential ) {
             dockerImage.push("$BUILD_NUMBER")
             dockerImage.push('latest')
