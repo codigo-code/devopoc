@@ -24,7 +24,7 @@ describe('App',()=>{
                 res.should.have.status(200);
                 res.body.should.be.a('object');
                 let objPerson = JSON.parse(res.text);
-                assert.equal('peppa',objPerson[0].nombre);
+                assert.equal('peppp',objPerson[0].nombre);
                 assert.equal('george',objPerson[1].nombre);
                 done();
             })

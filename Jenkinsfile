@@ -27,6 +27,14 @@ pipeline {
         steps {
           sh 'npm test'
         }
+        post {
+          success {
+            echo 'funciono bien!'
+          }
+          failure {
+            echo 'se envia un correo xq fallo'
+          }
+        }
       }
   
 
