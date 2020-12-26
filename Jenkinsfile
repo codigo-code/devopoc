@@ -34,20 +34,22 @@ pipeline {
         steps {
             
         script {
-           try{
+          
               // sh '/usr/local/bin/npm install'
               // dockerImage = docker.build registry + ":$BUILD_NUMBER"
               sh """
                   
                   docker build -t $registry:$BUILD_NUMBER .
               """
-            }catch(err){
-              echo err.getMessage()
-            }
-          
           }
-          
-          
+        }
+        post{
+          success{
+            echo 'funciono bien :)'
+          }
+          failure {
+            echo 'rompio por todos lados :('
+          }
         }
       }
 
