@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: devopoc-pod
+  name: neopod-pod
   labels:
     name: devopoc
 spec:
@@ -11,6 +11,6 @@ spec:
     resources:
       limits:
         memory: "128Mi"
-        cpu: "100m"
+        cpu: "500m"
     ports:
       - containerPort: 3000

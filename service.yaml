@@ -1,15 +1,16 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: neo-node-express-service
+  name: devopoc-service
 spec:
   type: LoadBalancer
+  loadBalancerIP: 172.29.0.1
   ports:
-  - port: 80
+  - port: 8383
     targetPort: 80
-    nodePort: 32764
+    nodePort: 32765
   selector:
-    app: neo-node
+    app: devopoc
   
 
 
