@@ -38,6 +38,7 @@ pipeline {
               // sh '/usr/local/bin/npm install'
               // dockerImage = docker.build registry + ":$BUILD_NUMBER"
               sh """
+                  docker image -a 
                   docker build -t $registry:$BUILD_NUMBER .
               """
             }catch(err){
@@ -50,22 +51,22 @@ pipeline {
         }
       }
 
-      stage('Deploy Image') {
-        steps {
-          script {
-            try{
-              docker.withRegistry( '', registryCredential ) {
-                dockerImage.push("latest")
-                dockerImage.push("${env.BUILD_ID}")
+      // stage('Deploy Image') {
+      //   steps {
+      //     script {
+      //       try{
+      //         docker.withRegistry( '', registryCredential ) {
+      //           dockerImage.push("latest")
+      //           dockerImage.push("${env.BUILD_ID}")
 
-              }
+      //         }
 
-            }catch(err){
-              echo err.getMessage()
-            }
-          }
-        }
-      }
+      //       }catch(err){
+      //         echo err.getMessage()
+      //       }
+      //     }
+      //   }
+      // }
       stage('Apply Kubernetes files') {
         steps{
           script{
