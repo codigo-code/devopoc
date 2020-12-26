@@ -38,7 +38,7 @@ pipeline {
               // sh '/usr/local/bin/npm install'
               // dockerImage = docker.build registry + ":$BUILD_NUMBER"
               sh """
-                  docker image -a 
+                  
                   docker build -t $registry:$BUILD_NUMBER .
               """
             }catch(err){
