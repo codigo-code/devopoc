@@ -66,7 +66,7 @@ pipeline {
           script {
            
               docker.withRegistry( "https://index.docker.io/v1", registryCredential ) {
-                def image = docker.build("solwin/ejemplo")
+                def image = docker.build("{$registry:$BUILD_NUMBER}")
                 image.push()
                 // dockerImage.push("latest")
                 // dockerImage.push("${env.BUILD_ID}")
