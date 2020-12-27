@@ -1,7 +1,7 @@
 pipeline {
   environment {
     registry = 'solwin/neodevops'
-    registryCredential = 'dockerhub'
+    registryCredential = 'DockerHub'
     dockerImage = ''
     KUBECONFIG = '~/.kube/config'
   }
@@ -61,22 +61,26 @@ pipeline {
         }
       }
 
-      // stage('Deploy Image') {
-      //   steps {
-      //     script {
-      //       try{
-      //         docker.withRegistry( '', registryCredential ) {
-      //           dockerImage.push("latest")
-      //           dockerImage.push("${env.BUILD_ID}")
+      stage('Deploy Image') {
+        steps {
+          script {
+           
+              docker.withRegistry( "https://index.docker.io/v1", registryCredential ) {
+                def image = docker.build("solwin/ejemplo")
+                image.push()
+                // dockerImage.push("latest")
+                // dockerImage.push("${env.BUILD_ID}")
 
-      //         }
-
-      //       }catch(err){
-      //         echo err.getMessage()
-      //       }
-      //     }
-      //   }
-      // }
+              }
+          }
+          success{
+            echo "push"
+          }
+          failure {
+            echo "error ver log"
+          }
+        }
+      }
       stage('Apply Kubernetes files') {
         steps{
           script{
