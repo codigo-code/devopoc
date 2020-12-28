@@ -38,36 +38,36 @@ pipeline {
       }
   
 
-    //  stage('Building image') {
-    //     steps {
+     stage('Building local image') {
+        steps {
             
-    //     script {
+        script {
           
-    //           // sh '/usr/local/bin/npm install'
-    //           // dockerImage = docker.build registry + ":$BUILD_NUMBER"
-    //           sh """
+              // sh '/usr/local/bin/npm install'
+              // dockerImage = docker.build registry + ":$BUILD_NUMBER"
+              sh """
                   
-    //               docker build -t $registry:$BUILD_NUMBER .
-    //           """
-    //       }
-    //     }
-    //     post{
-    //       success{
-    //         echo 'funciono bien :)'
-    //       }
-    //       failure {
-    //         echo 'rompio por todos lados :('
-    //       }
-    //     }
-    // }
+                  docker build -t $registry:$BUILD_NUMBER .
+              """
+          }
+        }
+        post{
+          success{
+            echo 'funciono bien :)'
+          }
+          failure {
+            echo 'rompio por todos lados :('
+          }
+        }
+    }
 
       stage('Deploy Image and push on DockerHub') {
         steps {
           script {
            
-              docker.withRegistry( "https://index.docker.io/v1", registryCredential ) {
-                def image = docker.build("$registry:$BUILD_NUMBER")
-                image.push()
+              // docker.withRegistry( "https://index.docker.io/v1", registryCredential ) {
+              //   def image = docker.build("$registry:$BUILD_NUMBER")
+              //   image.push()
                 // dockerImage.push("latest")
                 // dockerImage.push("${env.BUILD_ID}")
 
