@@ -92,24 +92,23 @@ pipeline {
       //   }
       // }
 
-      stage('Apply Kubernetes pod') {
-        steps{
-          script{
-            sh """
-                kubectl apply -f pod.yaml
+      // stage('Apply Kubernetes pod') {
+      //   steps{
+      //     script{
+      //       sh """
+      //           kubectl apply -f pod.yaml
 
-            """
-          }
-        }
-      }
+      //       """
+      //     }
+      //   }
+      // }
 
       stage('Apply Kubernetes service') {
         steps{
-          script{
-            sh """
-                kubectl apply -f service.yaml
-
-            """
+          withKubeConfig([credentialsId: 'kubernetes', serverUrl: 'https://192.168.64.9:8443']) {
+            sh 'kubectl apply -f pod.yaml'
+            sh 'kubectl apply -f service.yaml'
+            
           }
         }
       }
