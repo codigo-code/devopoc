@@ -45,10 +45,10 @@ pipeline {
           
               // sh '/usr/local/bin/npm install'
               // dockerImage = docker.build registry + ":$BUILD_NUMBER"
-              sh ("""
+              sh """
                   
                   docker build -t $registry:$BUILD_NUMBER .
-              """)
+              """
           }
         }
         post{
@@ -82,21 +82,21 @@ pipeline {
       //   }
       // }
 
-      stage('Check vulnerability') {
-        steps{
-          script{
-            sh """
-                trivy $registry:$BUILD_NUMBER
-               """
-          }
-        }
-      }
+      // stage('Check vulnerability') {
+      //   steps{
+      //     script{
+      //       sh """
+      //           trivy $registry:$BUILD_NUMBER
+      //          """
+      //     }
+      //   }
+      // }
 
       stage('Apply Kubernetes pod') {
         steps{
           script{
             sh """
-                oc apply -f pod.yaml
+                kubectl apply -f pod.yaml
 
             """
           }
@@ -107,7 +107,7 @@ pipeline {
         steps{
           script{
             sh """
-                oc apply -f service.yaml
+                kubectl apply -f service.yaml
 
             """
           }
