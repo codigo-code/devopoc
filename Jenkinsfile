@@ -59,27 +59,27 @@ pipeline {
             echo 'rompio por todos lados :('
           }
         }
-    }
+     }
 
-      stage('Deploy Image and push on DockerHub') {
-        steps {
-          script {
+      // stage('Deploy Image and push on DockerHub') {
+      //   steps {
+      //     script {
            
-              // docker.withRegistry( "https://index.docker.io/v1", registryCredential ) {
-              //   def image = docker.build("$registry:$BUILD_NUMBER")
-              //   image.push()
-                // dockerImage.push("latest")
-                // dockerImage.push("${env.BUILD_ID}")
+      //         // docker.withRegistry( "https://index.docker.io/v1", registryCredential ) {
+      //         //   def image = docker.build("$registry:$BUILD_NUMBER")
+      //         //   image.push()
+      //           // dockerImage.push("latest")
+      //           // dockerImage.push("${env.BUILD_ID}")
 
-              }
-          }
-          success{
-            echo "push"
-          }
-          failure {
-            echo "error ver log"
-          }
-        }
+      //         }
+      //     }
+      //     success{
+      //       echo "push"
+      //     }
+      //     failure {
+      //       echo "error ver log"
+      //     }
+      //   }
       // }
 
       stage('Check vulnerability') {
