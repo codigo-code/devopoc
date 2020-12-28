@@ -107,8 +107,8 @@ pipeline {
         steps{
           withKubeConfig([credentialsId: 'minikube', serverUrl: 'https://192.168.64.9:8443']) {
             sh 'pwd'
-            sh '~/usr/local/bin/kubectl apply -f pod.yaml'
-            sh '~/usr/local/bin/kubectl apply -f service.yaml'
+            sh 'kubectl apply -f pod.yaml'
+            sh 'kubectl apply -f service.yaml'
             
           }
         }
