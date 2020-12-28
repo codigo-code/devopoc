@@ -105,7 +105,7 @@ pipeline {
 
       stage('Apply Kubernetes service') {
         steps{
-          withKubeConfig([credentialsId: 'default', serverUrl: 'https://192.168.64.9:8443']) {
+          withKubeConfig([credentialsId: "cluster-admin", serverUrl: 'https://192.168.64.9:8443']) {
             sh 'kubectl apply -f pod.yaml'
             sh 'kubectl apply -f service.yaml'
             
