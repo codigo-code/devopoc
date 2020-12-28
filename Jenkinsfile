@@ -66,7 +66,7 @@ pipeline {
           script {
            
               docker.withRegistry( "https://index.docker.io/v1", registryCredential ) {
-                def image = docker.build("{$registry:$BUILD_NUMBER}")
+                def image = docker.build("$registry:$BUILD_NUMBER")
                 image.push()
                 // dockerImage.push("latest")
                 // dockerImage.push("${env.BUILD_ID}")
@@ -86,7 +86,7 @@ pipeline {
         steps{
           script{
             sh """
-                trivy {$registry:$BUILD_NUMBER}
+                trivy $registry:$BUILD_NUMBER
                """
           }
         }
