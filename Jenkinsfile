@@ -38,30 +38,30 @@ pipeline {
       }
   
 
-     stage('Building image') {
-        steps {
+    //  stage('Building image') {
+    //     steps {
             
-        script {
+    //     script {
           
-              // sh '/usr/local/bin/npm install'
-              // dockerImage = docker.build registry + ":$BUILD_NUMBER"
-              sh """
+    //           // sh '/usr/local/bin/npm install'
+    //           // dockerImage = docker.build registry + ":$BUILD_NUMBER"
+    //           sh """
                   
-                  docker build -t $registry:$BUILD_NUMBER .
-              """
-          }
-        }
-        post{
-          success{
-            echo 'funciono bien :)'
-          }
-          failure {
-            echo 'rompio por todos lados :('
-          }
-        }
-      }
+    //               docker build -t $registry:$BUILD_NUMBER .
+    //           """
+    //       }
+    //     }
+    //     post{
+    //       success{
+    //         echo 'funciono bien :)'
+    //       }
+    //       failure {
+    //         echo 'rompio por todos lados :('
+    //       }
+    //     }
+    // }
 
-      stage('Deploy Image') {
+      stage('Deploy Image and push on DockerHub') {
         steps {
           script {
            
@@ -81,12 +81,40 @@ pipeline {
           }
         }
       }
-      stage('Apply Kubernetes files') {
+
+      stage('Check vulnerability') {
         steps{
           script{
-            echo "subiendo a la nube de openshift"
+            sh """
+                trivy {$registry:$BUILD_NUMBER}
+               """
           }
         }
       }
+
+      stage('Apply Kubernetes pod') {
+        steps{
+          script{
+            sh """
+                oc apply -f pod.yaml
+
+            """
+          }
+        }
+      }
+
+      stage('Apply Kubernetes service') {
+        steps{
+          script{
+            sh """
+                oc apply -f service.yaml
+
+            """
+          }
+        }
+      }
+
+
+      
     }
 }
