@@ -104,13 +104,14 @@ pipeline {
       // }
 
       stage('Apply Kubernetes service') {
-    
-        steps{
-          container('kubectl'){
-            withKubeConfig([credentialsId: 'minikube', serverUrl: 'https://192.168.64.9:8443']) {
-              
-              sh('kubectl apply -f pod.yaml')
-              sh('kubectl apply -f service.yaml')
+        node(POD_LABEL){
+          steps{
+            container('kubectl'){
+              withKubeConfig([credentialsId: 'minikube', serverUrl: 'https://192.168.64.9:8443']) {
+                
+                sh('kubectl apply -f pod.yaml')
+                sh('kubectl apply -f service.yaml')
+              }
             }
           }
         }
