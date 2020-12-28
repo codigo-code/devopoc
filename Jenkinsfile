@@ -80,7 +80,7 @@ pipeline {
             echo "error ver log"
           }
         }
-      }
+      // }
 
       stage('Check vulnerability') {
         steps{
