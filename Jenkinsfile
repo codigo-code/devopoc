@@ -96,7 +96,7 @@ pipeline {
         steps{
           script{
             sh """
-                kubectl apply -f pod.yaml
+                ~/.kube/config/kubectl apply -f pod.yaml
 
             """
           }
@@ -107,7 +107,7 @@ pipeline {
         steps{
           script{
             sh """
-                kubectl apply -f service.yaml
+                 ~/.kube/config/kubectl apply -f service.yaml
 
             """
           }
