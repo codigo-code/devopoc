@@ -107,11 +107,12 @@ pipeline {
     
         steps{
           // container('kubectl'){
-            // withKubeConfig([credentialsId: 'minikube', serverUrl: 'https://192.168.64.9:8443']) {
-              
-              sh('kubectl apply -f pod.yaml')
-              sh('kubectl apply -f service.yaml')
-            // }
+            withKubeConfig([credentialsId: 'minikube', serverUrl: 'https://192.168.64.9:8443']) {
+              sh('pwd')
+              sh('minikube kubectl')
+              sh('minikube kubectl apply -f pod.yaml')
+              sh('minikube kubectl apply -f service.yaml')
+            }
           // }
         }
       }
