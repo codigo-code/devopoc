@@ -45,10 +45,10 @@ pipeline {
           
               // sh '/usr/local/bin/npm install'
               // dockerImage = docker.build registry + ":$BUILD_NUMBER"
-              sh """
+              sh ("""
                   
                   docker build -t $registry:$BUILD_NUMBER .
-              """
+              """)
           }
         }
         post{

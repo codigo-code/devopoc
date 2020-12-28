@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
   - name: devopoc
-    image: solwin/devopoc
+    image: solwin/neodevops
     resources:
       limits:
         memory: "128Mi"
