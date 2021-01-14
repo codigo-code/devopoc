@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devopoc-deployment
+spec:
+  selector:
+    matchLabels:
+      app: devopoc-deployment
+  
+  template:
+    metadata:
+      labels:
+        app: devopoc-deployment
+    
+    spec:
+      containers:
+      - name: devopoc-deployment
+        image: solwin/devopoc
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3000
+
