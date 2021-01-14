@@ -110,8 +110,8 @@ pipeline {
             withKubeConfig([credentialsId: 'minikube', serverUrl: 'https://192.168.64.10:8443']) {
               sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"'  
               sh 'chmod u+x ./kubectl' 
-              sh('./kubectl apply -f pod2.yaml')
-              sh('./kubectl apply -f service2.yaml')
+              sh('./kubectl apply -f deploymentexpress.yaml')
+              sh('./kubectl apply -f serviceexpress.yaml')
             }
           // }
         }
